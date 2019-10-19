@@ -5,3 +5,46 @@
 
     
 // Test verification with incorrect proof
+var SquareVerifier = artifacts.require('SquareVerifier');
+
+contract('TestSquareVerifier', accounts => {
+
+    const account_one = accounts[0];
+
+    describe('Test verifier functions', function () {
+        beforeEach(async function () {
+            this.contract = await SquareVerifier.new({from: account_one});
+        })
+
+        it('should verify with correct proof.', async function () {
+            const { proof, inputs } = {
+                "proof": {
+                    "a": ["0x017a6435eb58818971a68ba911c6a3e9b6e6d7668178ae4faad5dc5440a156e1", "0x0c1502f424b34b284ab7390aca0af9f3ca7aa0e0b912657a97789871ee3d3431"],
+                    "b": [["0x19ccd846a4e94793a6fa25e635ca90ea3ffdd35422ab3caae915eaec29f10692", "0x0eb75af125871f2d43600b1d0759e16ae8725ad5aad4a49af1075fc2376277b8"], ["0x2ce8e0f63a17cf41aa1f8b946ceae03fb580402c2862bb4e5f0dfcebb11e2000", "0x03d4c25fc0535d06817f614c81ba94e152e4b2c2ac697ccfcdb0ba781c840af5"]],
+                    "c": ["0x2ed6de69cd3b09fb4f4602efe0c6a9db6175476132d67e9681e8d4c3db6ad462", "0x16895e078ce16b3d784981c00a63d61c366acfc9fd75ae69c41bfdbf4c02c485"]
+                },
+                "inputs": ["0x0000000000000000000000000000000000000000000000000000000000000009", "0x0000000000000000000000000000000000000000000000000000000000000001"]
+            };
+
+            const result = await this.contract.verify.call(proof.a, proof.b, proof.c, inputs);
+            assert.equal(true, result);
+        })
+
+        it('should not verify with incorrect proof.', async function () {
+            const { proof, inputs } = {
+                "proof": {
+                    "a": ["0x017a6435eb58818971a68ba911c6a3e9b6e6d7668178ae4faad5dc5440a156e2", "0x0c1502f424b34b284ab7390aca0af9f3ca7aa0e0b912657a97789871ee3d3431"],
+                    "b": [["0x19ccd846a4e94793a6fa25e635ca90ea3ffdd35422ab3caae915eaec29f10693", "0x0eb75af125871f2d43600b1d0759e16ae8725ad5aad4a49af1075fc2376277b8"], ["0x2ce8e0f63a17cf41aa1f8b946ceae03fb580402c2862bb4e5f0dfcebb11e2000", "0x03d4c25fc0535d06817f614c81ba94e152e4b2c2ac697ccfcdb0ba781c840af5"]],
+                    "c": ["0x2ed6de69cd3b09fb4f4602efe0c6a9db6175476132d67e9681e8d4c3db6ad462", "0x16895e078ce16b3d784981c00a63d61c366acfc9fd75ae69c41bfdbf4c02c485"]
+                },
+                "inputs": ["0x0000000000000000000000000000000000000000000000000000000000000008", "0x0000000000000000000000000000000000000000000000000000000000000001"]
+            };
+
+            try {
+                await this.contract.verify.call(proof.a, proof.b, proof.c, inputs);
+            } catch (e) {
+                assert.equal('Returned error: VM Exception while processing transaction: invalid opcode', e.message);
+            }
+        })
+    });
+})
