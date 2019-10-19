@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  zokrates:
+    build: .
+    volumes:
+      - './zokrates:/home/zokrates'
