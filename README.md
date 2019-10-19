@@ -12,3 +12,27 @@ The capstone will build upon the knowledge you have gained in the course in orde
 * [Interactive zero knowledge 3-colorability demonstration](http://web.mit.edu/~ezyang/Public/graph/svg.html)
 * [Docker](https://docs.docker.com/install/)
 * [ZoKrates](https://github.com/Zokrates/ZoKrates)
+
+
+# Setup
+```
+npm install
+```
+
+# Run the tests
+```
+truffle test
+```
+
+# Contracts
+The contracts have been deployed on the Rinkeby network : 
+https://rinkeby.etherscan.io/address/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c
+
+# Tokens
+List of my tokens :
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/5
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/6
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/7
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/8
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/9
+- https://rinkeby.opensea.io/assets/0xbeb15fab85fb8a7ab0421561e722a81dd0cf7c5c/10
